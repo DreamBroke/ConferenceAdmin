@@ -2,20 +2,20 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import jdbc.ControlDB;
 import models.Conference;
 
 public class ConferenceDAO {
 	
-	public Conference getConference(){
+	public static Conference getConference(){
 		ResultSet rs = null;
 		String sql = "select * from conference";
 		rs = ControlDB.executeQuery(sql);
-		Conference con = null;
+		Conference con = new Conference();
 		try {
-			while(rs.next()){
-				con = new Conference();
+			if(rs.next()){
 				con.setCon_no(rs.getInt("con_no"));
 				con.setCon_name(rs.getString("con_name"));
 				con.setCon_host(rs.getString("con_host"));
@@ -38,6 +38,46 @@ public class ConferenceDAO {
 			e.printStackTrace();
 		}
 		return con;
+	}
+	
+	public static void modifyConference(Conference con){
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		String startdate = sdf.format(con.getCon_startdate());
+		String enddate = sdf.format(con.getCon_enddate());
+		String upstartdate = sdf2.format(con.getCon_upstartdate());
+		String upenddate = sdf2.format(con.getCon_upenddate());
+		String sql = "UPDATE `conferencemanage`.`conference` SET `con_name` = '"
+				+ con.getCon_name() 
+				+ "', `con_host` = '"
+				+ con.getCon_host() 
+				+ "', `con_organizer` = '"
+				+ con.getCon_organizer() 
+				+ "', `con_co-organizer` = '"
+				+ con.getCon_co_organizer() 
+				+ "', `con_startdate` = '"
+				+ startdate
+				+ "', `con_enddate` = '"
+				+ enddate
+				+ "', `con_upstartdate` = '"
+				+ upstartdate
+				+ "', `con_upenddate` = '"
+				+ upenddate
+				+ "', `con_address` = '"
+				+ con.getCon_address() 
+				+ "', `con_contents` = '"
+				+ con.getCon_contents() 
+				+ "', `con_affair-linkman` = '"
+				+ con.getCon_affair_linkman() 
+				+ "', `con_finance-linkman` = '"
+				+ con.getCon_finance_linkman() 
+				+ "', `con_capital` = '"
+				+ con.getCon_capital() 
+				+ "', `con_repast` = '"
+				+ con.getCon_repast() 
+				+ "', `con_scopen` = '"
+				+ con.getCon_scopen() + "' WHERE `con_no` = " + con.getCon_no();
+		ControlDB.executeUpdate(sql);
 	}
 	
 }

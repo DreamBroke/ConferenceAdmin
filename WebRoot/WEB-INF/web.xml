@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>servlet.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AddScheduleServlet</servlet-name>
+		<servlet-class>servlet.AddScheduleServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DeleteScheduleServlet</servlet-name>
+		<servlet-class>servlet.DeleteScheduleServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ExitServlet</servlet-name>
+		<servlet-class>servlet.ExitServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ModifyConferenceServlet</servlet-name>
+		<servlet-class>servlet.ModifyConferenceServlet</servlet-class>
+	</servlet>
+
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/LoginServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ExitServlet</servlet-name>
+		<url-pattern>/ExitServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ModifyConferenceServlet</servlet-name>
+		<url-pattern>/ModifyConferenceServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteScheduleServlet</servlet-name>
+		<url-pattern>/DeleteSchedule</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AddScheduleServlet</servlet-name>
+		<url-pattern>/AddScheduleServlet</url-pattern>
+	</servlet-mapping>
+
+</web-app>

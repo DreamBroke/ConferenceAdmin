@@ -1,3 +1,4 @@
+<%@page import="models.Teacher"%>
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=utf-8"%>
 <%
@@ -41,8 +42,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 </head>
 
-<body style="background: url('public/image/login.jpg');">
-	<div class="container" >
+<body style="background: url('public/image/login2.jpg');">
+	<div class="container">
+		<% 
+		Teacher tea = (Teacher)session.getAttribute("tea");
+		if(tea == null){
+	%>
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 				<div class="login-panel panel panel-default">
@@ -50,15 +55,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<h3 class="panel-title">请登录</h3>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form role="form" action="LoginServlet" method="POST">
 							<fieldset>
 								<div class="form-group">
 									<input class="form-control" placeholder="用户名" name="username"
 										type="text" autofocus>
 								</div>
 								<div class="form-group">
-									<input class="form-control" placeholder="密码"
-										name="password" type="password" value="">
+									<input class="form-control" placeholder="密码" name="password"
+										type="password">
 								</div>
 								<div class="checkbox">
 									<label> <input name="remember" type="checkbox"
@@ -66,13 +71,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</label>
 								</div>
 								<!-- Change this to a button or input when using this as a form -->
-								<a href="index.html" class="btn btn-lg btn-success btn-block">登录</a>
+								<button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
 							</fieldset>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
+		<%
+		}else{%>
+		<script type="text/javascript">
+			alert("您已登录，请不要重复登录！");
+			window.location.href="index.jsp";
+		</script>
+		<% 
+		}
+		String message = (String)session.getAttribute("message");
+		if(message != null && message != ""){
+		%>	
+		<script type="text/javascript">
+		alert("<%=message%>");
+		</script>
+		<%
+			session.removeAttribute("message");
+		}
+		%>
+
 	</div>
 
 	<!-- jQuery -->

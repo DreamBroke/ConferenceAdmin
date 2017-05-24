@@ -2,13 +2,16 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import jdbc.ControlDB;
 import models.Schedule;
 
 public class ScheduleDAO {
 
-	public ArrayList<Schedule> getAllSchedule() {
+	public static ArrayList<Schedule> getAllSchedule() {
 		ArrayList<Schedule> al = new ArrayList<Schedule>();
 		ResultSet rs = null;
 		String sql = "select * from schedule";
@@ -49,4 +52,30 @@ public class ScheduleDAO {
 		return al;
 	}
 
+	public static int addSchedule(Schedule sche){
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String sql = "INSERT INTO `conferencemanage`.`schedule` (`sche_date`,`sche_starttime`,`sche_endtime`,`sche_speaker`,`sche_content`,`sche_address`,`sche_category`) VALUES ('"
+				+ format.format(sche.getSche_date()) 
+				+ "', '"
+				+ format.format(sche.getSche_starttime()) 
+				+ "', '"
+				+ format.format(sche.getSche_endtime()) 
+				+ "', '"
+				+ sche.getSche_speaker()
+				+ "', '"
+				+ sche.getSche_content()
+				+ "', '"
+				+ sche.getSche_address()
+				+ "', '"
+				+ sche.getSche_category() + "')";
+		int i = ControlDB.executeUpdate(sql);
+		return i;
+	}
+	
+	public static int deleteScheduleByNo(String no){
+		String sql = "DELETE FROM `conferencemanage`.`schedule` WHERE sche_no = " + no;
+		int i = ControlDB.executeUpdate(sql);
+		return i;
+	}
+	
 }
