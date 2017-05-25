@@ -33,4 +33,19 @@ public class ProfessionalDAO {
 		return al;
 	}
 	
+	public static String getProfessionalByNo(String no){
+		String str = "";
+		String sql = "select pro_name from professional where pro_no = " + no;
+		ResultSet rs = null;
+		rs = ControlDB.executeQuery(sql);
+		try {
+			if(rs.next()){
+				str = rs.getString("pro_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return str;
+	}
 }

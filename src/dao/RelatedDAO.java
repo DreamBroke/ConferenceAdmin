@@ -50,4 +50,26 @@ public class RelatedDAO {
 		}
 		return al;
 	}
+	
+	public static ArrayList<Related> getAllRelated(){
+		ArrayList<Related> al = new ArrayList<Related>();
+		Related r = null;
+		ResultSet rs = null;
+		String sql = "select * from related";
+		rs = ControlDB.executeQuery(sql);
+		try {
+			while(rs.next()){
+				r = new Related();
+				r.setRel_no(rs.getInt("rel_no"));
+				r.setRel_name(rs.getString("rel_name"));
+				r.setRel_brief(rs.getString("rel_brief"));
+				r.setRel_photo(rs.getString("rel_photo"));
+				al.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;
+	}
 }

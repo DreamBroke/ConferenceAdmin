@@ -32,6 +32,30 @@ public class RoomDAO {
 		}
 		return al;
 	}
+	
+	public static ArrayList<Room> getAllRoom() {
+		ArrayList<Room> al = new ArrayList<Room>();
+		ResultSet rs = null;
+		String sql = "select * from room where roo_hotel";
+		Room r = null;
+		rs = ControlDB.executeQuery(sql);
+		try {
+			while (rs.next()) {
+				r = new Room();
+				r.setRoo_no(rs.getInt("roo_no"));
+				r.setRoo_name(rs.getString("roo_name"));
+				r.setRoo_description(rs.getString("roo_description"));
+				r.setRoo_available(rs.getInt("roo_available"));
+				r.setRoo_hotel(rs.getInt("roo_hotel"));
+				r.setRoo_price(rs.getDouble("roo_price"));
+				al.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;
+	}
 
 	public static void decreaseAvailable(String no) {
 		String sql = "UPDATE `conferencemanage`.`room` SET `roo_available` = `roo_available`-1 WHERE `roo_no` = "

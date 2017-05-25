@@ -8,7 +8,7 @@ public class Review {
 	private int rev_dissertation;
 	private int rev_teacher;
 	private int rev_condition;
-	private int rev_proposal;
+	private String rev_proposal;
 	private Date rev_assigntime;
 	private Date rev_reviewtime;
 	public int getRev_no() {
@@ -35,10 +35,10 @@ public class Review {
 	public void setRev_condition(int rev_condition) {
 		this.rev_condition = rev_condition;
 	}
-	public int getRev_proposal() {
+	public String getRev_proposal() {
 		return rev_proposal;
 	}
-	public void setRev_proposal(int rev_proposal) {
+	public void setRev_proposal(String rev_proposal) {
 		this.rev_proposal = rev_proposal;
 	}
 	public Date getRev_assigntime() {

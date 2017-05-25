@@ -1,3 +1,5 @@
+<%@page import="dao.RelatedDAO"%>
+<%@page import="models.Related"%>
 <%@page import="dao.TeacherDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="dao.ScheduleDAO"%>
@@ -20,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>广西大学会议管理系统后台 - 会议日程管理</title>
+<title>广西大学会议管理系统后台 - 会议周边管理</title>
 
 <%@include file="headcss.html"%>
    <link href="public/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
@@ -48,39 +50,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div style="height: 50px;" class="panel-heading">会议日程管理<a href="conference_schedule_add.jsp" class="btn btn-primary" style="float: right;">添加日程</a></div>		
+						<div style="height: 50px;" class="panel-heading">会议周边管理<a href="conference_schedule_add.jsp" class="btn btn-primary" style="float: right;">添加周边</a></div>		
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-striped table-bordered table-hover" id="table">
 									<thead>
 										<tr>
-											<th>举办日期</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
-											<th>报告人</th>
-											<th>内容</th>
-											<th>地点</th>
-											<th>类别</th>
+											<th>周边名</th>
+											<th>相应说明</th>
+											<th>图片预览</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<%
-										SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-										SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
-										ArrayList<Schedule> al = ScheduleDAO.getAllSchedule();
-										for(Schedule s : al){
+										ArrayList<Related> al = RelatedDAO.getOtherRelated();
+										for(Related r : al){
 										%>
 										<tr>
-										<td><%=sdf.format(s.getSche_date())%></td>
-										<td><%=sdf2.format(s.getSche_starttime())%></td>
-										<td><%=sdf2.format(s.getSche_endtime())%></td>
-										<td><%=TeacherDAO.getTeacherNameByNo(s.getSche_speaker())%></td>
-										<td><%=s.getSche_content()%></td>
-										<td><%=s.getSche_address()%></td>
-										<td><%=s.getSche_category()%></td>
-										<td><a class="btn btn-primary" href="conference_schedule_modify.jsp?sche_no=<%=s.getSche_no()%>">修改</a><a href="DeleteSchedule?sche_no=<%=s.getSche_no()%>" class="btn btn-danger" onclick="return deleteOck()">删除</a></td>
+										<td><%=r.getRel_name()%></td>
+										<td><%=r.getRel_brief()%></td>
+										<td><img alt="<%=r.getRel_brief()%>" src="public/image/related/<%=r.getRel_photo()%>.jpg"></td>
+										<td><a class="btn btn-primary" href="conference_related_modify.jsp?rel_no=<%=r.getRel_no()%>">修改</a><a href="DeleteRelated?rel_no=<%=r.getRel_no()%>" class="btn btn-danger" onclick="return deleteOck()">删除</a></td>
 										</tr>
 										<%}%>
 									</tbody>

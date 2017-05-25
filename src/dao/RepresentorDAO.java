@@ -8,6 +8,22 @@ import models.Representor;
 
 public class RepresentorDAO {
 
+	public static String getNameByNo(String no) {
+		String str = "";
+		String sql = "select rep_name from representor where rep_no = " + no;
+		ResultSet rs = null;
+		rs = ControlDB.executeQuery(sql);
+		try {
+			while (rs.next()) {
+				str = rs.getString("rep_name");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return str;
+	}
+	
 	public static Representor doLogin(String username, String password) {
 		Representor rep = null;
 		String sql = "select * from representor where rep_username = ? and rep_password = ?";

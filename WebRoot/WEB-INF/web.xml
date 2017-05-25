@@ -22,6 +22,16 @@
 		<servlet-name>ModifyConferenceServlet</servlet-name>
 		<servlet-class>servlet.ModifyConferenceServlet</servlet-class>
 	</servlet>
+  <servlet>
+    <servlet-name>ModifyScheduleServlet</servlet-name>
+    <servlet-class>servlet.ModifyScheduleServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddReviewServlet</servlet-name>
+    <servlet-class>servlet.AddReviewServlet</servlet-class>
+  </servlet>
+
+
 
 
 	<servlet-mapping>
@@ -44,5 +54,13 @@
 		<servlet-name>AddScheduleServlet</servlet-name>
 		<url-pattern>/AddScheduleServlet</url-pattern>
 	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ModifyScheduleServlet</servlet-name>
+    <url-pattern>/ModifyScheduleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddReviewServlet</servlet-name>
+    <url-pattern>/AddReviewServlet</url-pattern>
+  </servlet-mapping>
 
 </web-app>

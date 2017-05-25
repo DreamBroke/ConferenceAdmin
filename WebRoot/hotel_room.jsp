@@ -1,7 +1,11 @@
+<%@page import="dao.HotelDAO"%>
+<%@page import="dao.RoomDAO"%>
+<%@page import="models.Room"%>
+<%@page import="dao.RealmDao"%>
+<%@page import="dao.ScopeDAO"%>
+<%@page import="dao.ProfessionalDAO"%>
 <%@page import="dao.TeacherDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="dao.ScheduleDAO"%>
-<%@page import="models.Schedule"%>
 <%@page import="models.Teacher"%>
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=utf-8"%>
@@ -20,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>广西大学会议管理系统后台 - 会议日程管理</title>
+<title>广西大学会议管理系统后台 - 房间类型管理</title>
 
 <%@include file="headcss.html"%>
    <link href="public/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
@@ -48,39 +52,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-						<div style="height: 50px;" class="panel-heading">会议日程管理<a href="conference_schedule_add.jsp" class="btn btn-primary" style="float: right;">添加日程</a></div>		
+						<div style="height: 50px;" class="panel-heading">房间类型管理<a href="conference_schedule_add.jsp" class="btn btn-primary" style="float: right;">添加房间</a></div>		
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive">
 								<table class="table table-striped table-bordered table-hover" id="table">
 									<thead>
 										<tr>
-											<th>举办日期</th>
-											<th>开始时间</th>
-											<th>结束时间</th>
-											<th>报告人</th>
-											<th>内容</th>
-											<th>地点</th>
-											<th>类别</th>
+											<th>房间名</th>
+											<th>剩余数量</th>
+											<th>所属酒店</th>
+											<th>价格</th>
 											<th></th>
 										</tr>
 									</thead>
 									<tbody>
 										<%
-										SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-										SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
-										ArrayList<Schedule> al = ScheduleDAO.getAllSchedule();
-										for(Schedule s : al){
+										ArrayList<Room> al = RoomDAO.getAllRoom();
+										for(Room r : al){
 										%>
 										<tr>
-										<td><%=sdf.format(s.getSche_date())%></td>
-										<td><%=sdf2.format(s.getSche_starttime())%></td>
-										<td><%=sdf2.format(s.getSche_endtime())%></td>
-										<td><%=TeacherDAO.getTeacherNameByNo(s.getSche_speaker())%></td>
-										<td><%=s.getSche_content()%></td>
-										<td><%=s.getSche_address()%></td>
-										<td><%=s.getSche_category()%></td>
-										<td><a class="btn btn-primary" href="conference_schedule_modify.jsp?sche_no=<%=s.getSche_no()%>">修改</a><a href="DeleteSchedule?sche_no=<%=s.getSche_no()%>" class="btn btn-danger" onclick="return deleteOck()">删除</a></td>
+										<td><%=r.getRoo_name()%></td>
+										<td><%=r.getRoo_available()%>间</td>
+										<td><%=HotelDAO.getNameByNo(r.getRoo_hotel()+"")%></td>
+										<td>￥<%=r.getRoo_price()%></td>
+										<td><a class="btn btn-primary" href="#">修改</a><a href="#" class="btn btn-danger" onclick="return deleteOck()">删除</a></td>
 										</tr>
 										<%}%>
 									</tbody>

@@ -48,4 +48,29 @@ public class CheckDAO {
 		return al;
 	}
 	
+	public static ArrayList<Check> selectAllCheckByRep_no(){
+		ArrayList<Check> al = new ArrayList<Check>();
+		String sql = "select * from `check`";
+		ResultSet rs = null;
+		Check che = null;
+		rs = ControlDB.executeQuery(sql);
+		try {
+			while (rs.next()) {
+				che = new Check();
+				che.setChe_no(rs.getInt("che_no"));
+				che.setChe_account(rs.getString("che_account"));
+				che.setChe_method(rs.getInt("che_method"));
+				che.setChe_money(rs.getDouble("che_money"));
+				che.setChe_time(rs.getDate("che_time"));
+				che.setChe_representor(rs.getInt("che_representor"));
+				che.setChe_teacher(rs.getInt("che_teacher"));
+				che.setChe_room(rs.getInt("che_room"));
+				al.add(che);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;
+	}
 }

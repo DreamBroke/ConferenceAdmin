@@ -82,6 +82,34 @@ public class DissertationDAO {
 		}
 		return al;
 	}
+	
+	public static ArrayList<Dissertation> getAllDissertation() {
+		ArrayList<Dissertation> al = new ArrayList<Dissertation>();
+		ResultSet rs = null;
+		String sql = "select * from dissertation";
+		Dissertation dis = null;
+		rs = ControlDB.executeQuery(sql);
+		try {
+			while (rs.next()) {
+				dis = new Dissertation();
+				dis.setDis_no(rs.getInt("dis_no"));
+				dis.setDis_title(rs.getString("dis_title"));
+				dis.setDis_keyword(rs.getString("dis_keyword"));
+				dis.setDis_abstract(rs.getString("dis_abstract"));
+				dis.setDis_realm(rs.getInt("dis_realm"));
+				dis.setDis_author(rs.getInt("dis_author"));
+				dis.setDis_file(rs.getString("dis_file"));
+				dis.setDis_condition(rs.getInt("dis_condition"));
+				dis.setDis_uptime(rs.getDate("dis_uptime"));
+				dis.setDis_apptime(rs.getDate("dis_apptime"));
+				al.add(dis);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return al;
+	}
 
 	public static Dissertation getDissertationByNo(String no) {
 		Dissertation dis = new Dissertation();
